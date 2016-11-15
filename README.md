@@ -12,14 +12,17 @@ For example, https://app.asana.com/0/199352541227/list, 199352541227 is the proj
 it's require java 1.8 or newer.
 
 2) Open terminal and run this command
-```
+~~~~
 java -version
-```
-If you see something like this
-```java version "1.8.0_11"
-   Java(TM) SE Runtime Environment (build 1.8.0_11-b12)
-   Java HotSpot(TM) 64-Bit Server VM (build 25.11-b03, mixed mode)
-```
+~~~~
+
+If you see something like this:
+
+~~~~
+java version "1.8.0_11"
+Java(TM) SE Runtime Environment (build 1.8.0_11-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.11-b03, mixed mode)``
+~~~~
 
 It's mean that everything ok.
 

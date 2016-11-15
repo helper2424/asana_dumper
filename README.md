@@ -31,11 +31,11 @@ It's mean that everything ok.
 
 4) After this, you should go to the asana site (now it's http://asana.com/ ) and open project, which you want dump.
 
-5) Copy project id, I will call this <project_id>. http://take.ms/EbqVV , here <project_id> == 199352541227
+5) Copy project id, I will call this `<project_id>`. http://take.ms/EbqVV , here `<project_id> == 199352541227`
 
-6) Now we need authorization data for dumper. Open EditThisCookie browser extension and find cookie auth_token. Copy value of this cookie, this value I will call <auth_token>. Here example http://take.ms/JFKD6 , <auth_token> == 384f19b537a59d5c9d450d6921c0bba1
+6) Now we need authorization data for dumper. Open EditThisCookie browser extension and find cookie auth_token. Copy value of this cookie, this value I will call `<auth_token>`. Here example http://take.ms/JFKD6 , `<auth_token> == 384f19b537a59d5c9d450d6921c0bba1`
 
-7) Repeat 4 step with ticket cookie, It's value I will call <ticket>. https://monosnap.com/file/p61pF53UqNgy058uISuGI4FWmxhdQA
+7) Repeat 4 step with ticket cookie, It's value I will call `<ticket>`. https://monosnap.com/file/p61pF53UqNgy058uISuGI4FWmxhdQA
 
 8) Open terminal and go to the project folder. Go to the target directory.
 

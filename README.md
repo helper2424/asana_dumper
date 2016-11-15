@@ -10,6 +10,7 @@ For example, https://app.asana.com/0/199352541227/list, 199352541227 is the proj
 
 1) Install Java to your computer. You can download installer here http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html ,
 it's require java 1.8 or newer.
+
 2) Open terminal and run this command
 ```
 java -version
@@ -19,6 +20,7 @@ If you see something like this
    Java(TM) SE Runtime Environment (build 1.8.0_11-b12)
    Java HotSpot(TM) 64-Bit Server VM (build 25.11-b03, mixed mode)
 ```
+
 It's mean that everything ok.
 
 3) Next, install this extension for your browser https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en.

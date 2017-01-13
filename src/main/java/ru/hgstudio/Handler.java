@@ -56,7 +56,7 @@ public class Handler implements Runnable {
                     stories.addProperty("description", taskData.getAsJsonObject("data").get("notes").getAsString());
 
                     Files.write(Paths.get("./out/" + this.tasks.get(i).toString() + ".json"),
-                            new GsonBuilder().setPrettyPrinting().create().toJson(stories).getBytes());
+                            new GsonBuilder().setPrettyPrinting().create().toJson(stories).getBytes("UTF8"));
 
                     Thread.sleep(500 + (int) (Math.random() * 100));
                     i++;

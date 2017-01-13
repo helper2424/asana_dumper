@@ -56,3 +56,8 @@ With my values it will look like this
 ```
 
 11) When script finish all your dumps will be in <project_dir>/target/out directory in json format
+
+# How to build jar file
+```
+mvn clean compile assembly:single
+```

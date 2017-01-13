@@ -33,8 +33,19 @@ public class Handler implements Runnable {
             while (i <= this.max && i < this.tasks.size()) {
                 boolean ok = true;
                 JSONObject stories = null;
+                JSONObject taskData = null;
+                String taskId = this.tasks.get(i).toString();
+
                 try {
-                    stories = Main.requestData(this.cookies, "https://app.asana.com/api/1.0/tasks/" + this.tasks.get(i).toString() + "/stories");
+                    taskData = Main.requestData(this.cookies, "https://app.asana.com/api/1.0/tasks/" + taskId);
+                }
+                catch(Exception error) {
+                    System.out.println(String.format("Error %s", error.getMessage()));
+                    ok = false;
+                }
+
+                try {
+                    stories = Main.requestData(this.cookies, "https://app.asana.com/api/1.0/tasks/" + taskId + "/stories");
                 }
                 catch(Exception error) {
                     System.out.println(String.format("Error %s", error.getMessage()));
@@ -42,9 +53,10 @@ public class Handler implements Runnable {
                 }
 
                 if (ok) {
-                    System.out.println("Finished task " +  String.valueOf(i) + " " + this.tasks.get(i).toString());
-                    stories.put("id", this.tasks.get(i));
+                    System.out.println("Finished task " +  String.valueOf(i) + " " + taskId);
+                    stories.put("id", taskId);
                     stories.put("name", this.tasksNames.get(i));
+                    stories.put("description", ((JSONObject)taskData.get("data")).get("notes").toString());
                     Files.write(Paths.get("./out/" + this.tasks.get(i).toString() + ".json"), stories.toJSONString().getBytes());
 
                     Thread.sleep(500 + (int)(Math.random() * 100));

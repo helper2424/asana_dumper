@@ -1,15 +1,13 @@
 package ru.hgstudio;
 
-import java.nio.charset.Charset;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import org.apache.http.client.CookieStore;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import org.apache.http.client.CookieStore;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import ru.hgstudio.Main;
 
 public class Handler implements Runnable {
     private final int min;
@@ -32,34 +30,35 @@ public class Handler implements Runnable {
             int i = this.min;
             while (i <= this.max && i < this.tasks.size()) {
                 boolean ok = true;
-                JSONObject stories = null;
-                JSONObject taskData = null;
+                JsonParser parser = new JsonParser();
+                JsonObject stories = null;
+                JsonObject taskData = null;
                 String taskId = this.tasks.get(i).toString();
 
                 try {
                     taskData = Main.requestData(this.cookies, "https://app.asana.com/api/1.0/tasks/" + taskId);
-                }
-                catch(Exception error) {
+                } catch (Exception error) {
                     System.out.println(String.format("Error %s", error.getMessage()));
                     ok = false;
                 }
 
                 try {
                     stories = Main.requestData(this.cookies, "https://app.asana.com/api/1.0/tasks/" + taskId + "/stories");
-                }
-                catch(Exception error) {
+                } catch (Exception error) {
                     System.out.println(String.format("Error %s", error.getMessage()));
                     ok = false;
                 }
 
                 if (ok) {
-                    System.out.println("Finished task " +  String.valueOf(i) + " " + taskId);
-                    stories.put("id", taskId);
-                    stories.put("name", this.tasksNames.get(i));
-                    stories.put("description", ((JSONObject)taskData.get("data")).get("notes").toString());
-                    Files.write(Paths.get("./out/" + this.tasks.get(i).toString() + ".json"), stories.toJSONString().getBytes());
+                    System.out.println("Finished task " + String.valueOf(i) + " " + taskId);
+                    stories.addProperty("id", taskId);
+                    stories.addProperty("name", this.tasksNames.get(i));
+                    stories.addProperty("description", taskData.getAsJsonObject("data").get("notes").getAsString());
 
-                    Thread.sleep(500 + (int)(Math.random() * 100));
+                    Files.write(Paths.get("./out/" + this.tasks.get(i).toString() + ".json"),
+                            new GsonBuilder().setPrettyPrinting().create().toJson(stories).getBytes());
+
+                    Thread.sleep(500 + (int) (Math.random() * 100));
                     i++;
                 }
             }

@@ -1,15 +1,13 @@
 package ru.hgstudio;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -49,8 +47,8 @@ public class Main {
 
         try {
 
-            JSONObject contentBody = requestData(cookieStore, "https://app.asana.com/api/1.0/projects/" + args[0] + "/tasks");
-            JSONArray data = (JSONArray) contentBody.get("data");
+            JsonObject contentBody = requestData(cookieStore, "https://app.asana.com/api/1.0/projects/" + args[0] + "/tasks");
+            JsonArray data = contentBody.getAsJsonArray("data");
 
             tasks = new ArrayList<Long>(data.size());
             taskNames = new ArrayList<String>(data.size());
@@ -59,9 +57,9 @@ public class Main {
 
             Iterator i = data.iterator();
             while (i.hasNext()) {
-                JSONObject val = (JSONObject) i.next();
-                tasks.add((Long) val.get("id"));
-                taskNames.add((String) val.get("name"));
+                JsonObject val = (JsonObject) i.next();
+                tasks.add(val.get("id").getAsLong());
+                taskNames.add(val.get("name").getAsString());
             }
         } catch (Exception e) {
             System.out.println(String.format("Error %s", e.getMessage()));
@@ -96,12 +94,12 @@ public class Main {
         System.out.println("Finished dump asana tasks");
     }
 
-    public static JSONObject requestData(CookieStore cookies, String uri) throws IOException, ParseException {
+    public static JsonObject requestData(CookieStore cookies, String uri) throws IOException {
         Executor executor = Executor.newInstance();
         String content = executor.use(cookies).execute(createRequest(uri)).returnContent().asString();
 
-        JSONParser parser = new JSONParser();
-        return (JSONObject) parser.parse(content);
+        JsonParser parser = new JsonParser();
+        return parser.parse(content).getAsJsonObject();
     }
 
     public static Request createRequest(String uri) {

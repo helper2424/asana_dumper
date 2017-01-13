@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": 589364564937,
+      "created_at": "2012-03-12T04:15:09.145Z",
+      "type": "system",
+      "text": "added to Python server",
+      "created_by": {
+        "id": 4803258185277,
+        "name": "index01d"
+      }
+    },
+    {
+      "id": 589364564938,
+      "created_at": "2012-03-12T04:17:16.827Z",
+      "type": "system",
+      "text": "assigned to you",
+      "created_by": {
+        "id": 4803258185277,
+        "name": "index01d"
+      }
+    },
+    {
+      "id": 601014938977,
+      "created_at": "2012-03-14T18:14:55.329Z",
+      "type": "system",
+      "text": "completed this task",
+      "created_by": {
+        "id": 199290339547,
+        "name": "helper"
+      }
+    }
+  ],
+  "id": "589364564936",
+  "name": "(8*) Разработать Python-сервер для работы с картой gmaps",
+  "description": "Текст с описанием\nhttps://docs.google.com/document/d/1zUPScwEImW5fZrykqiq123cU0e47bzS7sIubj4w2OWs/edit"
+}
